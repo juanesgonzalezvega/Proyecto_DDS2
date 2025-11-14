@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from typing import Dict, Any, List
 
-from ..schemas import EcuacionConica, PuntoEvaluacion
+# CORRECCIÓN CLAVE: Importamos el módulo 'schemas' del paquete padre (davinci)
+from .. import schemas
 from ..services.calculo_vectorial import clasificar_superficie_conica, calcular_valor_ecuacion
 
 router = APIRouter()
@@ -9,8 +10,9 @@ router = APIRouter()
 
 @router.post("/clasificar_evaluar", response_model=Dict[str, Any], tags=["Calculo Vectorial"])
 def clasificar_y_evaluar_superficie(
-        ecuacion_data: EcuacionConica,
-        puntos_evaluacion: List[PuntoEvaluacion]
+        # USAMOS EL PREFIJO 'schemas.' AHORA
+        ecuacion_data: schemas.EcuacionConica,
+        puntos_evaluacion: List[schemas.PuntoEvaluacion]
 ):
     ecuacion_dict = ecuacion_data.model_dump()
 
