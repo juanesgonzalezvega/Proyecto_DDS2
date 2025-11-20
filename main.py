@@ -3,17 +3,14 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-try:
-    from rutas import simulation, team, project
-except ImportError:
-    raise
+from rutas import simulation, team, project
 
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 plantillas = Jinja2Templates(directory="templates")
 
-app.include_router(simulation.router, prefix="/simulation", tags=["Simulation"])
+app.include_router(simulation.router, prefix="/simulation", tags=["Simulation", "Fuerzas"])
 app.include_router(team.router, prefix="/team", tags=["Team"])
 app.include_router(project.router, prefix="/project", tags=["Project"])
 

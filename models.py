@@ -1,5 +1,10 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
+
+class Fuerza(BaseModel):
+    tipo: str
+    magnitud: float
+    direccion: str
 
 class Tanque(BaseModel):
     nombre: str = "Tanque de Leonardo da Vinci"
@@ -7,11 +12,7 @@ class Tanque(BaseModel):
     radio_rueda: float
     fuerza_motriz: float
     coeficiente_rozamiento: float
-
-class Fuerza(BaseModel):
-    tipo: str
-    magnitud: float
-    direccion: str
+    fuerzas: Optional[List[Fuerza]] = []  # Nueva lista para registrar fuerzas
 
 class SuperficieEntrada(BaseModel):
     tipo: str
@@ -25,4 +26,3 @@ class SuperficieResultado(BaseModel):
     volumen: float
     area_superficial: float
     cortes_ejes: dict
-
