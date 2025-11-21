@@ -30,7 +30,7 @@ async def fisica(request: Request):
 async def readme(request: Request):
     return plantillas.TemplateResponse("readme.html", {"request": request, "page": "readme"})
 
-@app.get("/about", response_class=HTMLResponse)  # Nueva ruta para About
+@app.get("/about", response_class=HTMLResponse)
 async def about(request: Request):
     return plantillas.TemplateResponse("about.html", {"request": request, "page": "about"})
 

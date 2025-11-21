@@ -1,57 +1,91 @@
 # 🚀 Proyecto Colaborativo: El Tanque de Guerra de Leonardo da Vinci
 
-## 📖 Descripción del Proyecto
-
-Este proyecto tiene como objetivo analizar el **tanque de guerra diseñado por Leonardo da Vinci**, aplicando y modelando conceptos de física y matemáticas de las materias **Física 2** y **Cálculo Vectorial**.
-
-Buscamos estudiar y modelar el funcionamiento teórico del diseño, comprendiendo su posible operación utilizando teorías físicas y matemáticas modernas.
+## 📖 Descripción del Proyecto  
+Este proyecto analiza el tanque de guerra diseñado por Leonardo da Vinci, modelando su funcionamiento mediante conceptos de **Física II** y **Cálculo Vectorial**. Se explora la viabilidad teórica del diseño a través de simulaciones, modelos matemáticos y una **aplicación web interactiva** que permite visualizar cálculos, navegar entre secciones y comprender mejor los principios detrás del mecanismo.
 
 ---
 
-## 🎯 Objetivos
+## 🎯 Objetivos  
+- **Análisis Matemático:** Estudiar la geometría, componentes móviles y comportamiento teórico del tanque mediante herramientas del cálculo vectorial.  
+- **Simulación Física:** Modelar fuerzas como fricción, torque, energía de movimiento y estabilidad con cálculos interactivos.  
+- **Documentación Integral:** Crear una página web que presente el análisis realizado, mostrando resultados, visualizaciones y una sección *About* con información del equipo.
 
-1.  **Análisis Matemático:** Estudio del funcionamiento de las partes móviles y la geometría del tanque utilizando el **Cálculo Vectorial**.
-2.  **Simulación Física:** Modelado de las fuerzas involucradas en la operativa del tanque, tales como fricción, torque y el movimiento de las ruedas.
-3.  **Documentación:** Creación de una página web que evidencie los temas aprendidos y la integración de las diferentes materias.
+---
 
-## 🔬 Enfoque y Métodos Aplicados
+## 🔬 Enfoque y Métodos Aplicados  
 
-### Física 2
+### **Física II**  
+- **Cinemática y Dinámica:** Estudio de las fuerzas que afectan el movimiento del tanque.  
+- **Trabajo y Energía:** Cálculo de la energía necesaria para desplazarlo y resistencias del terreno.  
+- **Estabilidad y Equilibrio:** Análisis del centro de masa y distribución de fuerzas internas y externas.  
+- **Funcionalidades en la Web:**  
+  - Cálculos dinámicos (trabajo, termodinámica, cinemática, etc.)  
+  - Validación de datos  
+  - Resultados mostrados en tiempo real  
 
-* **Cinemática y Dinámica:** Análisis de las fuerzas que afectan al movimiento del tanque y su interacción con el terreno.
-* **Trabajo y Energía:** Cálculo de la energía requerida para mover el tanque y las posibles fuentes de resistencia.
-* **Estabilidad y Equilibrio:** Estudio de la estabilidad del tanque y el impacto de las fuerzas externas e internas.
+### **Cálculo Vectorial**  
+- **Vectores de Fuerza:** Representación de fuerzas y momentos en el sistema del tanque.  
+- **Teoremas Fundamentales:** Aplicación de Stokes, Gauss y Divergencia para análisis de campos físicos.  
+- **Funcionalidades en la Web:**  
+  - Formularios para ingresar valores  
+  - Cálculo de figuras cónicas  
+  - Visualizaciones básicas  
 
-### Cálculo Vectorial
+---
 
-* **Vectores de Fuerzas:** Uso de vectores para representar fuerzas y momentos en el sistema del tanque.
-* **Teoremas y Leyes:** Aplicación de teoremas fundamentales del cálculo vectorial (como el teorema de Stokes y el teorema de la divergencia) para el análisis de campos de fuerzas.
+## 💻 Herramientas Utilizadas  
+- **Lenguajes:** Python (FastAPI), HTML, CSS, JavaScript.  
+- **Frameworks:** FastAPI (backend), Jinja2 (plantillas), Bootstrap 5 (frontend responsivo).  
+- **Visualización:** Integración con JavaScript; preparado para futuros motores gráficos (MATLAB u otros).  
+- **Base de Datos:** PostgreSQL (implementada en rutas, no usada activamente en la UI).  
 
-## 💻 Herramientas Utilizadas
+---
 
-* **Lenguaje de Programación:** Python, CSS, HTML para el modelado, cálculos y desarrollo de la página web.
-* **Software de Visualización:** MATLAB (o software similar) para representar gráficamente los resultados.
+## 👥 Miembros del Equipo  
+- **Juan V:** Análisis físico y teórico.  
+- **Julian G:** Cálculo vectorial y simulación matemática.  
+- **Juan G:** Coordinación, integración y visualización web.  
 
-## 👥 Miembros del Equipo
+---
 
-* **Juan V:** Responsable del análisis físico y teórico.
-* **Julian G:** Encargado de los cálculos vectoriales y simulación matemática.
-* **Juan G:** Coordinador y responsable de la integración de los resultados y visualización.
-
-## 📅 Fases del Proyecto
+## 📅 Fases del Proyecto  
 
 | Fase | Descripción | Estado |
-| :--- | :--- | :--- |
-| **Fase 1** | Investigación y recopilación de información sobre el tanque. | ✅ Completada |
-| **Fase 2** | Análisis físico y matemático inicial. | ⚙️ En desarrollo |
-| **Fase 3** | Simulación y modelado de componentes clave. | ⏳ Pendiente |
-| **Fase 4** | Interpretación de resultados y conclusiones. | ⏳ Pendiente |
-| **Fase 5** | Documentación y presentación final (Página Web). | ⏳ Pendiente |
-
-## 💡 Resultados Esperados
-
-* Un informe final que combine los conceptos de física y matemáticas aplicadas al diseño del tanque.
-* Visualizaciones gráficas que representen las simulaciones de fuerzas y movimiento.
-* Diseño de la página web donde se evidencien los temas y resultados del proyecto.
+|------|-------------|--------|
+| **Fase 1** | Investigación del tanque | ✅ Completada |
+| **Fase 2** | Análisis físico y matemático inicial | ⚙️ En desarrollo |
+| **Fase 3** | Simulación y modelado de componentes | ⏳ Pendiente |
+| **Fase 4** | Interpretación de resultados | ⏳ Pendiente |
+| **Fase 5** | Documentación final (Página Web) | ✅ Completada (versión funcional) |
 
 ---
+
+## 💡 Resultados Esperados  
+- Informe final que combine conceptos de física y cálculo vectorial aplicados al diseño del tanque.  
+- Visualizaciones gráficas del movimiento y fuerzas simuladas.  
+- Página web funcional, intuitiva y con cálculos interactivos.  
+
+---
+
+## 🛠️ Instalación y Configuración  
+
+### **Prerrequisitos**
+- Python 3.8 o superior  
+- Entorno virtual (`venv`) recomendado  
+- Dependencias: FastAPI, Uvicorn, Jinja2, Bootstrap (o desde `requirements.txt`)  
+
+---
+
+## 📋 Uso de la Aplicación  
+
+- **Sidebar:** Navegación entre Condatta, Cálculo Vectorial, Física II y About.  
+- **Página Condatta:** Introducción al tanque y biografía de Da Vinci.  
+- **Página Cálculo Vectorial:** Ingreso de valores para calcular figuras cónicas.  
+- **Página Física II:** Selección de ecuación → ingreso de datos → resultado dinámico.  
+- **Página About:** Información del proyecto y del equipo.  
+- **README:** Accesible desde la topbar.  
+
+---
+
+## 📄 Licencia  
+Proyecto académico. Sin licencia comercial; se requiere permiso de los autores para uso externo.

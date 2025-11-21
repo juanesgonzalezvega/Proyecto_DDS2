@@ -4,48 +4,63 @@
 
 {% block content %}
 <div class="container py-4">
-    <h2>🚀 Proyecto Colaborativo: El Tanque de Guerra de Leonardo da Vinci</h2>
+    <h1>🚀 Proyecto Colaborativo: El Tanque de Guerra de Leonardo da Vinci</h1>
 
-    <h4>📖 Descripción del Proyecto</h4>
-    <p>Este proyecto tiene como objetivo analizar el tanque de guerra diseñado por Leonardo da Vinci, aplicando y modelando conceptos de física y matemáticas de las materias Física 2 y Cálculo Vectorial.</p>
-    <p>Buscamos estudiar y modelar el funcionamiento teórico del diseño, comprendiendo su posible operación utilizando teorías físicas y matemáticas modernas.</p>
+    <h2>📖 Descripción del Proyecto</h2>
+    <p>Este proyecto analiza el tanque de guerra diseñado por Leonardo da Vinci, modelando su funcionamiento mediante conceptos de <strong>Física II</strong> y <strong>Cálculo Vectorial</strong>. Se explora la viabilidad teórica del diseño a través de simulaciones, modelos matemáticos y una <strong>aplicación web interactiva</strong> que permite visualizar cálculos, navegar entre secciones y comprender mejor los principios detrás del mecanismo.</p>
 
-    <h4>🎯 Objetivos</h4>
+    <h2>🎯 Objetivos</h2>
     <ul>
-        <li><strong>Análisis Matemático:</strong> Estudio del funcionamiento de las partes móviles y la geometría del tanque utilizando el Cálculo Vectorial.</li>
-        <li><strong>Simulación Física:</strong> Modelado de las fuerzas involucradas en la operativa del tanque, tales como fricción, torque y el movimiento de las ruedas.</li>
-        <li><strong>Documentación:</strong> Creación de una página web que evidencie los temas aprendidos y la integración de las diferentes materias.</li>
+        <li><strong>Análisis Matemático:</strong> Estudiar la geometría, componentes móviles y comportamiento teórico del tanque mediante herramientas del cálculo vectorial.</li>
+        <li><strong>Simulación Física:</strong> Modelar fuerzas como fricción, torque, energía de movimiento y estabilidad con cálculos interactivos.</li>
+        <li><strong>Documentación Integral:</strong> Crear una página web que presente el análisis realizado, mostrando resultados, visualizaciones y una sección <em>About</em> con información del equipo.</li>
     </ul>
 
-    <h4>🔬 Enfoque y Métodos Aplicados</h4>
+    <h2>🔬 Enfoque y Métodos Aplicados</h2>
 
-    <h5>Física 2</h5>
+    <h3>Física II</h3>
     <ul>
-        <li><strong>Cinemática y Dinámica:</strong> Análisis de las fuerzas que afectan al movimiento del tanque y su interacción con el terreno.</li>
-        <li><strong>Trabajo y Energía:</strong> Cálculo de la energía requerida para mover el tanque y las posibles fuentes de resistencia.</li>
-        <li><strong>Estabilidad y Equilibrio:</strong> Estudio de la estabilidad del tanque y el impacto de las fuerzas externas e internas.</li>
+        <li><strong>Cinemática y Dinámica:</strong> Estudio de las fuerzas que afectan el movimiento del tanque.</li>
+        <li><strong>Trabajo y Energía:</strong> Cálculo de la energía necesaria para desplazarlo y resistencias del terreno.</li>
+        <li><strong>Estabilidad y Equilibrio:</strong> Análisis del centro de masa y distribución de fuerzas internas y externas.</li>
+        <li><strong>Funcionalidades en la Web:</strong>
+            <ul>
+                <li>Cálculos dinámicos (trabajo, termodinámica, cinemática, etc.)</li>
+                <li>Validación de datos</li>
+                <li>Resultados mostrados en tiempo real</li>
+            </ul>
+        </li>
     </ul>
 
-    <h5>Cálculo Vectorial</h5>
+    <h3>Cálculo Vectorial</h3>
     <ul>
-        <li><strong>Vectores de Fuerzas:</strong> Uso de vectores para representar fuerzas y momentos en el sistema del tanque.</li>
-        <li><strong>Teoremas y Leyes:</strong> Aplicación de teoremas fundamentales del cálculo vectorial (como el teorema de Stokes y el teorema de la divergencia) para el análisis de campos de fuerzas.</li>
+        <li><strong>Vectores de Fuerza:</strong> Representación de fuerzas y momentos en el sistema del tanque.</li>
+        <li><strong>Teoremas Fundamentales:</strong> Aplicación de Stokes, Gauss y Divergencia para análisis de campos físicos.</li>
+        <li><strong>Funcionalidades en la Web:</strong>
+            <ul>
+                <li>Formularios para ingresar valores</li>
+                <li>Cálculo de figuras cónicas</li>
+                <li>Visualizaciones básicas</li>
+            </ul>
+        </li>
     </ul>
 
-    <h4>💻 Herramientas Utilizadas</h4>
+    <h2>💻 Herramientas Utilizadas</h2>
     <ul>
-        <li>Lenguaje de Programación: Python, CSS, HTML para el modelado, cálculos y desarrollo de la página web.</li>
-        <li>Software de Visualización: MATLAB (o software similar) para representar gráficamente los resultados.</li>
+        <li><strong>Lenguajes:</strong> Python (FastAPI), HTML, CSS, JavaScript.</li>
+        <li><strong>Frameworks:</strong> FastAPI (backend), Jinja2 (plantillas), Bootstrap 5 (frontend responsivo).</li>
+        <li><strong>Visualización:</strong> Integración con JavaScript; preparado para futuros motores gráficos (MATLAB u otros).</li>
+        <li><strong>Base de Datos:</strong> PostgreSQL (implementada en rutas, no usada activamente en la UI).</li>
     </ul>
 
-    <h4>👥 Miembros del Equipo</h4>
+    <h2>👥 Miembros del Equipo</h2>
     <ul>
-        <li>Juan V: Responsable del análisis físico y teórico.</li>
-        <li>Julian G: Encargado de los cálculos vectoriales y simulación matemática.</li>
-        <li>Juan G: Coordinador y responsable de la integración de los resultados y visualización.</li>
+        <li><strong>Juan V:</strong> Análisis físico y teórico.</li>
+        <li><strong>Julian G:</strong> Cálculo vectorial y simulación matemática.</li>
+        <li><strong>Juan G:</strong> Coordinación, integración y visualización web.</li>
     </ul>
 
-    <h4>📅 Fases del Proyecto</h4>
+    <h2>📅 Fases del Proyecto</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -55,19 +70,41 @@
             </tr>
         </thead>
         <tbody>
-            <tr><td>Fase 1</td><td>Investigación y recopilación de información sobre el tanque.</td><td>✅ Completada</td></tr>
-            <tr><td>Fase 2</td><td>Análisis físico y matemático inicial.</td><td>✅ Completada</td></tr>
-            <tr><td>Fase 3</td><td>Simulación y modelado de componentes clave.</td><td>✅ Completada</td></tr>
-            <tr><td>Fase 4</td><td>Interpretación de resultados y conclusiones.</td><td>✅ Completada</td></tr>
-            <tr><td>Fase 5</td><td>Documentación y presentación final (Página Web).</td><td>⏳ Pendiente</td></tr>
+            <tr><td><strong>Fase 1</strong></td><td>Investigación del tanque</td><td>✅ Completada</td></tr>
+            <tr><td><strong>Fase 2</strong></td><td>Análisis físico y matemático inicial</td><td>⚙️ En desarrollo</td></tr>
+            <tr><td><strong>Fase 3</strong></td><td>Simulación y modelado de componentes</td><td>⏳ Pendiente</td></tr>
+            <tr><td><strong>Fase 4</strong></td><td>Interpretación de resultados</td><td>⏳ Pendiente</td></tr>
+            <tr><td><strong>Fase 5</strong></td><td>Documentación final (Página Web)</td><td>✅ Completada (versión funcional)</td></tr>
         </tbody>
     </table>
 
-    <h4>💡 Resultados Esperados</h4>
+    <h2>💡 Resultados Esperados</h2>
     <ul>
-        <li>Un informe final que combine los conceptos de física y matemáticas aplicadas al diseño del tanque.</li>
-        <li>Visualizaciones gráficas que representen las simulaciones de fuerzas y movimiento.</li>
-        <li>Diseño de la página web donde se evidencien los temas y resultados del proyecto.</li>
+        <li>Informe final que combine conceptos de física y cálculo vectorial aplicados al diseño del tanque.</li>
+        <li>Visualizaciones gráficas del movimiento y fuerzas simuladas.</li>
+        <li>Página web funcional, intuitiva y con cálculos interactivos.</li>
     </ul>
+
+    <h2>🛠️ Instalación y Configuración</h2>
+
+    <h3>Prerrequisitos</h3>
+    <ul>
+        <li>Python 3.8 o superior</li>
+        <li>Entorno virtual (<code>venv</code>) recomendado</li>
+        <li>Dependencias: FastAPI, Uvicorn, Jinja2, Bootstrap (o desde <code>requirements.txt</code>)</li>
+    </ul>
+
+    <h2>📋 Uso de la Aplicación</h2>
+    <ul>
+        <li><strong>Sidebar:</strong> Navegación entre Condatta, Cálculo Vectorial, Física II y About.</li>
+        <li><strong>Página Condatta:</strong> Introducción al tanque y biografía de Da Vinci.</li>
+        <li><strong>Página Cálculo Vectorial:</strong> Ingreso de valores para calcular figuras cónicas.</li>
+        <li><strong>Página Física II:</strong> Selección de ecuación → ingreso de datos → resultado dinámico.</li>
+        <li><strong>Página About:</strong> Información del proyecto y del equipo.</li>
+        <li><strong>README:</strong> Accesible desde la topbar.</li>
+    </ul>
+
+    <h2>📄 Licencia</h2>
+    <p>Proyecto académico. Sin licencia comercial; se requiere permiso de los autores para uso externo.</p>
 </div>
 {% endblock %}
