@@ -15,11 +15,11 @@
 
     <div class="row mt-4">
         <div class="col-md-12">
-            <div class="shadow rounded p-3">
-                <h1>Clasificación de Superficies Cónicas y Evaluación Vectorial</h1>
+            <div class="shadow rounded p-3 bg-white">
+                <h5>Clasificación de Superficies Cónicas y Evaluación Vectorial</h5>
                 <form id="calculo-form">
-                    <h3 class="mt-4">Coeficientes de la Ecuación Cuadrática General</h3>
-                    <p>Ecuación: A·x² + B·y² + C·z² + D·xy + E·xz + F·yz + G·x + H·y + I·z + J = 0</p>
+                    <h6 class="mt-4">Coeficientes de la Ecuación Cuadrática General</h6>
+                    <p class="text-muted">Ecuación: A·x² + B·y² + C·z² + D·xy + E·xz + F·yz + G·x + H·y + I·z + J = 0</p>
 
                     <div class="row">
                         {% for coef in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'] %}
@@ -30,7 +30,7 @@
                         {% endfor %}
                     </div>
 
-                    <h3 class="mt-4">Punto para Evaluación (x, y, z)</h3>
+                    <h6 class="mt-4">Punto para Evaluación (x, y, z)</h6>
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="punto_x" class="form-label">Coordenada X</label>
@@ -46,22 +46,121 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-primary mt-3" onclick="clasificarYEvaluar()">Clasificar y Evaluar</button>
+                    <button type="button" class="btn btn-success mt-3" onclick="clasificarYEvaluar()">Clasificar y Evaluar</button>
                 </form>
 
                 <!-- Div para resultados emergentes -->
-                <div id="resultado-emergente" class="mt-3 alert alert-info" style="display: none;"></div>
+                <div id="resultado-emergente" class="mt-4 alert alert-info" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de registros -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="shadow rounded p-3 bg-white">
+                <h5>Registros de Cálculos Anteriores</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Ecuación</th>
+                                <th>Tipo de Superficie</th>
+                                <th>Punto</th>
+                                <th>Valor</th>
+                                <th>¿En Superficie?</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-registros">
+                            {% if registros and registros|length > 0 %}
+                                {% for registro in registros %}
+                                <tr>
+                                    <td>{{ registro.Ecuacion }}</td>
+                                    <td>{{ registro.Tipo_Superficie }}</td>
+                                    <td>{{ registro.Punto }}</td>
+                                    <td>{{ registro.Valor }}</td>
+                                    <td>{{ registro.En_Superficie }}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" onclick="visualizarRegistro({{ loop.index0 }})" title="Visualizar">
+                                            👁️ Ver
+                                        </button>
+                                        <button class="btn btn-warning btn-sm" onclick="editarRegistro({{ loop.index0 }})" title="Editar">
+                                            ✏️ Editar
+                                        </button>
+                                        <button class="btn btn-danger btn-sm" onclick="eliminarRegistro({{ loop.index0 }})" title="Eliminar">
+                                            🗑️ Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">No hay registros guardados aún</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar registro -->
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title" id="modalEditarLabel">✏️ Editar Registro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-editar">
+                    <input type="hidden" id="edit-indice" name="indice">
+
+                    <h6>Coeficientes de la Ecuación</h6>
+                    <div class="row">
+                        {% for coef in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'] %}
+                        <div class="col-md-3 mb-3">
+                            <label for="edit-{{ coef }}" class="form-label">{{ coef }}</label>
+                            <input type="number" step="any" class="form-control" id="edit-{{ coef }}" name="{{ coef }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <h6 class="mt-3">Punto de Evaluación</h6>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="edit-punto_x" class="form-label">Coordenada X</label>
+                            <input type="number" step="any" class="form-control" id="edit-punto_x" name="punto_x">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="edit-punto_y" class="form-label">Coordenada Y</label>
+                            <input type="number" step="any" class="form-control" id="edit-punto_y" name="punto_y">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="edit-punto_z" class="form-label">Coordenada Z</label>
+                            <input type="number" step="any" class="form-control" id="edit-punto_z" name="punto_z">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-warning" onclick="guardarEdicion()">💾 Guardar Cambios</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+    let registrosData = [];
+
     async function clasificarYEvaluar() {
         const formData = new FormData(document.getElementById('calculo-form'));
         const data = Object.fromEntries(formData.entries());
 
-        // Validar campos requeridos
         if (!data.punto_x || !data.punto_y || !data.punto_z) {
             alert('Valores incompletos, por favor ingrese todos los valores para proseguir con el cálculo');
             return;
@@ -72,47 +171,187 @@
                 method: 'POST',
                 body: formData
             });
+
+            if (!response.ok) throw new Error('Error en la solicitud');
+
             const resultados = await response.json();
+            mostrarResultados(resultados);
+            await cargarRegistros();
 
-            // Formatear resultados como en resultado.html de tu amigo
-            const ecuacion = resultados.ecuacion_recibida;
-            const tipo = resultados.tipo_superficie;
-            const evaluacion = resultados.evaluacion_puntos[0];
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Ocurrió un error al realizar el cálculo. Por favor, intente nuevamente.');
+        }
+    }
 
-            document.getElementById('resultado-emergente').innerHTML = `
-                <h2>Resultados del Cálculo Vectorial</h2>
-                <div style="background-color: #007bff; color: white; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
-                    <h3>Clasificación de la Superficie</h3>
-                    <ul>
-                        <li><strong>Ecuación (Recibida):</strong> A=${ecuacion.A}, B=${ecuacion.B}, C=${ecuacion.C}, D=${ecuacion.D}, E=${ecuacion.E}, F=${ecuacion.F}, G=${ecuacion.G}, H=${ecuacion.H}, I=${ecuacion.I}, J=${ecuacion.J}</li>
-                        <li><strong>Tipo Clasificado:</strong> ${tipo}</li>
-                    </ul>
-                </div>
-                <div style="background-color: #f7f7f7; color: #333; padding: 20px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #eee;">
-                    <h3>Propiedades Geométricas</h3>
-                    <ul>
-                        <li><strong>Volumen Calculado:</strong> N/A (no calculado en esta versión)</li>
-                        <li><strong>Área Superficial (Aprox.):</strong> N/A (no calculado en esta versión)</li>
-                    </ul>
-                </div>
-                <div style="background-color: #28a745; color: white; padding: 20px; border-radius: 6px;">
-                    <h3>Evaluación del Punto</h3>
-                    <ul>
-                        <li><strong>Punto Evaluado:</strong> ${evaluacion.punto}</li>
-                        <li><strong>Valor en la Ecuación:</strong> ${evaluacion.valor_en_ecuacion.toFixed(6)}</li>
-                        <li>
-                            ${evaluacion.esta_en_superficie ?
-                                '<span style="background-color: #28a745; color: white; padding: 5px 10px; border-radius: 4px;">El punto SÍ está en la Superficie</span>' :
-                                '<span style="background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 4px;">El punto NO está en la Superficie</span>'}
-                        </li>
+    function mostrarResultados(resultados) {
+        const ecuacion = resultados.ecuacion_recibida;
+        const tipo = resultados.tipo_superficie;
+        const evaluacion = resultados.evaluacion_puntos && resultados.evaluacion_puntos.length > 0
+            ? resultados.evaluacion_puntos[0] : null;
+
+        let ecuacionStr = `A=${ecuacion.A}, B=${ecuacion.B}, C=${ecuacion.C}, D=${ecuacion.D}, E=${ecuacion.E}, F=${ecuacion.F}, G=${ecuacion.G}, H=${ecuacion.H}, I=${ecuacion.I}, J=${ecuacion.J}`;
+
+        let resultadoHTML = `
+            <h5>📊 Resultados del Cálculo Vectorial</h5>
+            <div style="background-color: #0d6efd; color: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                <h6>🔍 Clasificación de la Superficie</h6>
+                <ul style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                    <li><strong>Ecuación:</strong> ${ecuacionStr}</li>
+                    <li><strong>Tipo de Superficie:</strong> ${tipo}</li>
+                </ul>
+            </div>
+        `;
+
+        if (evaluacion) {
+            resultadoHTML += `
+                <div style="background-color: #198754; color: white; padding: 20px; border-radius: 8px;">
+                    <h6>📍 Evaluación del Punto</h6>
+                    <ul style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                        <li><strong>Punto evaluado:</strong> ${evaluacion.punto}</li>
+                        <li><strong>Valor de f(x,y,z):</strong> ${evaluacion.valor_en_ecuacion}</li>
+                        <li><strong>¿Está en la superficie?:</strong> ${evaluacion.esta_en_superficie ? '✅ Sí' : '❌ No'}</li>
                     </ul>
                 </div>
             `;
-            document.getElementById('resultado-emergente').style.display = 'block';
+        }
+
+        document.getElementById('resultado-emergente').innerHTML = resultadoHTML;
+        document.getElementById('resultado-emergente').style.display = 'block';
+    }
+
+    async function cargarRegistros() {
+        try {
+            const response = await fetch('/simulation/leer_registros_calculo');
+            if (!response.ok) throw new Error('Error al cargar registros');
+
+            const registros = await response.json();
+            registrosData = registros;
+            const tbody = document.getElementById('tabla-registros');
+
+            if (registros && registros.length > 0) {
+                tbody.innerHTML = registros.map((registro, index) => `
+                    <tr>
+                        <td>${registro.Ecuacion}</td>
+                        <td>${registro.Tipo_Superficie}</td>
+                        <td>${registro.Punto}</td>
+                        <td>${registro.Valor}</td>
+                        <td>${registro.En_Superficie}</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="visualizarRegistro(${index})" title="Visualizar">👁️ Ver</button>
+                            <button class="btn btn-warning btn-sm" onclick="editarRegistro(${index})" title="Editar">✏️ Editar</button>
+                            <button class="btn btn-danger btn-sm" onclick="eliminarRegistro(${index})" title="Eliminar">🗑️ Eliminar</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } else {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No hay registros guardados aún</td></tr>';
+            }
         } catch (error) {
-            document.getElementById('resultado-emergente').innerHTML = `<strong>Error:</strong> ${error.message}`;
-            document.getElementById('resultado-emergente').style.display = 'block';
+            console.error('Error al cargar registros:', error);
         }
     }
+
+    function visualizarRegistro(indice) {
+        const registro = registrosData[indice];
+        if (!registro) return;
+
+        const resultadoHTML = `
+            <h5>📋 Visualización de Registro #${indice + 1}</h5>
+            <div style="background-color: #0d6efd; color: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                <h6>🔍 Clasificación de la Superficie</h6>
+                <ul style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                    <li><strong>Ecuación:</strong> ${registro.Ecuacion}</li>
+                    <li><strong>Tipo de Superficie:</strong> ${registro.Tipo_Superficie}</li>
+                </ul>
+            </div>
+            <div style="background-color: #198754; color: white; padding: 20px; border-radius: 8px;">
+                <h6>📍 Evaluación del Punto</h6>
+                <ul style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                    <li><strong>Punto evaluado:</strong> ${registro.Punto}</li>
+                    <li><strong>Valor de f(x,y,z):</strong> ${registro.Valor}</li>
+                    <li><strong>¿Está en la superficie?:</strong> ${registro.En_Superficie}</li>
+                </ul>
+            </div>
+        `;
+
+        document.getElementById('resultado-emergente').innerHTML = resultadoHTML;
+        document.getElementById('resultado-emergente').style.display = 'block';
+        document.getElementById('resultado-emergente').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function editarRegistro(indice) {
+        const registro = registrosData[indice];
+        if (!registro) return;
+
+        const ecuacionMatch = registro.Ecuacion.match(/{'A': ([-\d.]+), 'B': ([-\d.]+), 'C': ([-\d.]+), 'D': ([-\d.]+), 'E': ([-\d.]+), 'F': ([-\d.]+), 'G': ([-\d.]+), 'H': ([-\d.]+), 'I': ([-\d.]+), 'J': ([-\d.]+)}/);
+
+        if (ecuacionMatch) {
+            ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].forEach((coef, i) => {
+                document.getElementById(`edit-${coef}`).value = ecuacionMatch[i + 1];
+            });
+        }
+
+        const puntoMatch = registro.Punto.match(/\(([-\d.]+), ([-\d.]+), ([-\d.]+)\)/);
+        if (puntoMatch) {
+            document.getElementById('edit-punto_x').value = puntoMatch[1];
+            document.getElementById('edit-punto_y').value = puntoMatch[2];
+            document.getElementById('edit-punto_z').value = puntoMatch[3];
+        }
+
+        document.getElementById('edit-indice').value = indice;
+        new bootstrap.Modal(document.getElementById('modalEditar')).show();
+    }
+
+    async function guardarEdicion() {
+        const formData = new FormData(document.getElementById('form-editar'));
+
+        try {
+            const response = await fetch('/simulation/editar_registro', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) throw new Error('Error al editar registro');
+
+            const result = await response.json();
+            alert(result.message);
+
+            bootstrap.Modal.getInstance(document.getElementById('modalEditar')).hide();
+            await cargarRegistros();
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Ocurrió un error al editar el registro.');
+        }
+    }
+
+    async function eliminarRegistro(indice) {
+        if (!confirm('¿Está seguro de que desea eliminar este registro?')) return;
+
+        try {
+            const formData = new FormData();
+            formData.append('indice', indice);
+
+            const response = await fetch('/simulation/eliminar_registro', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) throw new Error('Error al eliminar registro');
+
+            const result = await response.json();
+            alert(result.message);
+            await cargarRegistros();
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Ocurrió un error al eliminar el registro.');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        cargarRegistros();
+    });
 </script>
 {% endblock %}
