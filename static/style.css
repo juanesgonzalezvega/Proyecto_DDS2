@@ -14,7 +14,7 @@ body, html, #wrapper {
 #sidebar {
     min-height: 100vh;
     width: 180px;
-    background-color: #f8f9fa;
+    background-color: #555;
     padding: 1rem;
     box-sizing: border-box;
 }

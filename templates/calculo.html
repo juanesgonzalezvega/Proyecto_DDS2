@@ -14,26 +14,105 @@
     </div>
 
     <div class="row mt-4">
-        <!-- Eliminados los botones verticales -->
-
         <div class="col-md-12">
             <div class="shadow rounded p-3">
-                <h5>Graficación</h5>
-                <form>
-                    <label class="form-label">Ingrese el radio de la base:</label>
-                    <input type="number" class="form-control mb-3" placeholder="Radio de la base" />
-                    <label class="form-label">Ingrese la altura máxima:</label>
-                    <input type="number" class="form-control mb-3" placeholder="Altura máxima" />
-                    <label class="form-label">Ingrese el ángulo de apertura:</label>
-                    <input type="number" class="form-control mb-3" placeholder="Ángulo de apertura" />
-                </form>
-                <div class="d-flex justify-content-center mt-3">
-                    <div style="width: 200px; height: 150px; background-color: #e0e0e0; display:flex; align-items:center; justify-content:center; color:#495057; border-radius: 8px;">
-                        Imagen figura cónica
+                <h1>Clasificación de Superficies Cónicas y Evaluación Vectorial</h1>
+                <form id="calculo-form">
+                    <h3 class="mt-4">Coeficientes de la Ecuación Cuadrática General</h3>
+                    <p>Ecuación: A·x² + B·y² + C·z² + D·xy + E·xz + F·yz + G·x + H·y + I·z + J = 0</p>
+
+                    <div class="row">
+                        {% for coef in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'] %}
+                        <div class="col-md-3 mb-3">
+                            <label for="{{ coef }}" class="form-label">Coef. {{ coef }}</label>
+                            <input type="number" step="any" class="form-control" id="{{ coef }}" name="{{ coef }}" value="0.0">
+                        </div>
+                        {% endfor %}
                     </div>
-                </div>
+
+                    <h3 class="mt-4">Punto para Evaluación (x, y, z)</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="punto_x" class="form-label">Coordenada X</label>
+                            <input type="number" step="any" class="form-control" id="punto_x" name="punto_x" value="0.0" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="punto_y" class="form-label">Coordenada Y</label>
+                            <input type="number" step="any" class="form-control" id="punto_y" name="punto_y" value="0.0" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="punto_z" class="form-label">Coordenada Z</label>
+                            <input type="number" step="any" class="form-control" id="punto_z" name="punto_z" value="0.0" required>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary mt-3" onclick="clasificarYEvaluar()">Clasificar y Evaluar</button>
+                </form>
+
+                <!-- Div para resultados emergentes -->
+                <div id="resultado-emergente" class="mt-3 alert alert-info" style="display: none;"></div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    async function clasificarYEvaluar() {
+        const formData = new FormData(document.getElementById('calculo-form'));
+        const data = Object.fromEntries(formData.entries());
+
+        // Validar campos requeridos
+        if (!data.punto_x || !data.punto_y || !data.punto_z) {
+            alert('Valores incompletos, por favor ingrese todos los valores para proseguir con el cálculo');
+            return;
+        }
+
+        try {
+            const response = await fetch('/simulation/clasificar_evaluar_json', {
+                method: 'POST',
+                body: formData
+            });
+            const resultados = await response.json();
+
+            // Formatear resultados como en resultado.html de tu amigo
+            const ecuacion = resultados.ecuacion_recibida;
+            const tipo = resultados.tipo_superficie;
+            const evaluacion = resultados.evaluacion_puntos[0];
+
+            document.getElementById('resultado-emergente').innerHTML = `
+                <h2>Resultados del Cálculo Vectorial</h2>
+                <div style="background-color: #007bff; color: white; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
+                    <h3>Clasificación de la Superficie</h3>
+                    <ul>
+                        <li><strong>Ecuación (Recibida):</strong> A=${ecuacion.A}, B=${ecuacion.B}, C=${ecuacion.C}, D=${ecuacion.D}, E=${ecuacion.E}, F=${ecuacion.F}, G=${ecuacion.G}, H=${ecuacion.H}, I=${ecuacion.I}, J=${ecuacion.J}</li>
+                        <li><strong>Tipo Clasificado:</strong> ${tipo}</li>
+                    </ul>
+                </div>
+                <div style="background-color: #f7f7f7; color: #333; padding: 20px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #eee;">
+                    <h3>Propiedades Geométricas</h3>
+                    <ul>
+                        <li><strong>Volumen Calculado:</strong> N/A (no calculado en esta versión)</li>
+                        <li><strong>Área Superficial (Aprox.):</strong> N/A (no calculado en esta versión)</li>
+                    </ul>
+                </div>
+                <div style="background-color: #28a745; color: white; padding: 20px; border-radius: 6px;">
+                    <h3>Evaluación del Punto</h3>
+                    <ul>
+                        <li><strong>Punto Evaluado:</strong> ${evaluacion.punto}</li>
+                        <li><strong>Valor en la Ecuación:</strong> ${evaluacion.valor_en_ecuacion.toFixed(6)}</li>
+                        <li>
+                            ${evaluacion.esta_en_superficie ?
+                                '<span style="background-color: #28a745; color: white; padding: 5px 10px; border-radius: 4px;">El punto SÍ está en la Superficie</span>' :
+                                '<span style="background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 4px;">El punto NO está en la Superficie</span>'}
+                        </li>
+                    </ul>
+                </div>
+            `;
+            document.getElementById('resultado-emergente').style.display = 'block';
+        } catch (error) {
+            document.getElementById('resultado-emergente').innerHTML = `<strong>Error:</strong> ${error.message}`;
+            document.getElementById('resultado-emergente').style.display = 'block';
+        }
+    }
+</script>
 {% endblock %}
