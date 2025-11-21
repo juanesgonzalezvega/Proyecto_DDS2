@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% set page = "condatta" %}
+{% block title %}Condatta - Da Vinci's War Tank{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+    <div class="col-md-4 d-flex flex-column gap-3">
+        <div class="shadow rounded overflow-hidden" style="height:200px;">
+            <div class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center text-white">Boceto 1</div>
+        </div>
+        <div class="shadow rounded overflow-hidden" style="height:200px;">
+            <div class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center text-white">Boceto 2</div>
+        </div>
+        <div class="shadow rounded overflow-hidden" style="height:300px;">
+            <div class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center text-white">Retrato</div>
+        </div>
+    </div>
+    <div class="col-md-8 d-flex flex-column gap-3">
+        <div class="shadow rounded p-4 bg-white">
+            <div class="w-100" style="height:320px; background-color:#dee2e6; display:flex;
+                 align-items:center; justify-content:center; color:#495057;">Modelo 3D del tanque</div>
+        </div>
+        <div class="shadow rounded bg-white p-4">
+            <h5>Información Relevante de Leonardo Da Vinci</h5>
+            <ul>
+                <li><strong>Nacionalidad:</strong> Italiano</li>
+                <li><strong>Época:</strong> Renacimiento</li>
+            </ul>
+            <p><strong>Obras principales:</strong></p>
+            <ul>
+                <li>La Mona Lisa</li>
+                <li>La Última Cena</li>
+                <li>El Hombre de Vitruvio</li>
+            </ul>
+            <p><strong>Inventos y estudios:</strong></p>
+            <ul>
+                <li>Diseñó un tanque de guerra precursor de vehículos militares modernos.</li>
+                <li>Bocetos de máquinas, puentes, armas y sistemas hidráulicos.</li>
+                <li>Estudios anatómicos para entender el cuerpo humano.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

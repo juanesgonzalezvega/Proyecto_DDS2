@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% set page = "fisica" %}
+{% block title %}Física II - Proyecto DaVinci{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Uso de la física</h4>
+            <p>
+                El tanque de guerra de Leonardo da Vinci puede analizar desde la cinemática y las energías. Su movimiento dependiente de la conversación de la energía muscular en energía mecánica media engranajes y ruedas, generando traducción y rotación. En su funcionamiento intervencionista la energía cinética, la energía potencial y las personas ocupadas por la fuerza de rozamiento con el suelo y la resistencia viscosa del aire, mientras que su diseño coportaba estabilidad al distribuir mejor las masas. En conjunto, representa un ejemplo práctico de los principios de la mecánica clínica aplicados al movimiento, el trabajo y la conservación de la energía.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Eliminados los botones verticales -->
+
+        <div class="col-md-12">
+            <form class="shadow rounded p-3">
+                <label class="form-label">Masa del tanque:</label>
+                <input type="number" class="form-control mb-3" placeholder="Masa del tanque" />
+                <label class="form-label">Velocidad (lineal):</label>
+                <input type="number" class="form-control mb-3" placeholder="Velocidad lineal" />
+                <label class="form-label">Velocidad angular:</label>
+                <input type="number" class="form-control mb-3" placeholder="Velocidad angular" />
+                <label class="form-label">Coeficiente de fricción:</label>
+                <input type="number" class="form-control mb-3" placeholder="Coeficiente de fricción" />
+                <label class="form-label">Constante de resistencia del aire:</label>
+                <input type="number" class="form-control mb-3" placeholder="Constante de resistencia del aire" />
+                <label class="form-label">Altura o inclinación de terreno:</label>
+                <input type="number" class="form-control mb-3" placeholder="Altura o inclinación" />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

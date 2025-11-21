@@ -1,11 +1,56 @@
 {% extends "base.html" %}
+{% set page = "home" %}
 
-{% block title %}Inicio - Proyecto DaVinci{% endblock %}
+{% block title %}Inicio - Da Vinci's War Tank{% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <h1 class="mb-4">Bienvenido al Proyecto DaVinci</h1>
-    <p>Este sistema permite realizar cálculos y simulaciones de datos relacionados con tu proyecto.</p>
-    <a href="/calculo" class="btn btn-primary mt-3">Ir al cálculo</a>
+<div class="mb-4 d-flex justify-content-center gap-3 flex-wrap nav-tabs-fake">
+    <a href="#" class="nav-tab active position-relative p-3 text-decoration-none text-dark flex-fill text-center">Condatt
+        <span class="icon-top-right">⚡</span></a>
+    <a href="/calculo" class="nav-tab position-relative p-3 text-decoration-none text-dark flex-fill text-center">Cálculo
+        Vectorial <span class="icon-top-right">⚡</span></a>
+    <a href="/fisica" class="nav-tab position-relative p-3 text-decoration-none text-dark flex-fill text-center">Física
+        <span class="icon-top-right">⚡</span></a>
+    <a href="/desarrollo" class="nav-tab position-relative p-3 text-decoration-none text-dark flex-fill text-center">Desarrollo
+        de Software <span class="icon-top-right">⚡</span></a>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4 d-flex flex-column gap-3">
+        <div class="card shadow-sm p-2 placeholder-image">[Boceto del tanque 1]</div>
+        <div class="card shadow-sm p-2 placeholder-image">[Boceto del tanque 2]</div>
+    </div>
+    <div class="col-md-8">
+        <div class="card shadow-sm p-3 text-center placeholder-image-large">[Modelo 3D del tanque]</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card shadow-sm p-2 placeholder-image">[Retrato Leonardo Da Vinci]</div>
+    </div>
+    <div class="col-md-8">
+        <div
+            class="card shadow-sm p-3 rounded d-flex flex-column justify-content-between h-100 bg-white border-1 border-secondary">
+            <h5>Información Relevante de Leonardo Da Vinci</h5>
+            <ul class="mb-3">
+                <li><strong>Nacionalidad:</strong> Italiano</li>
+                <li><strong>Época:</strong> Renacimiento</li>
+            </ul>
+            <p><strong>Obras principales:</strong></p>
+            <ul>
+                <li><em>La Mona Lisa</em></li>
+                <li><em>La Última Cena</em></li>
+                <li><em>El Hombre de Vitruvio</em> (dibujo sobre proporciones humanas)</li>
+            </ul>
+            <p><strong>Inventos y estudios:</strong></p>
+            <ul>
+                <li>Diseñó un <strong>tanque de guerra</strong> (vehículo blindado con cañones en 360 grados), precursor
+                    de los vehículos militares modernos.</li>
+                <li>Creó bocetos de máquinas voladoras, puentes, armas y sistemas hidráulicos.</li>
+                <li>Realizó estudios anatómicos mediante disección para entender el cuerpo humano.</li>
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}

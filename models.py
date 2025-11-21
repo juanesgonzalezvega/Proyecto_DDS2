@@ -12,7 +12,7 @@ class Tanque(BaseModel):
     radio_rueda: float
     fuerza_motriz: float
     coeficiente_rozamiento: float
-    fuerzas: Optional[List[Fuerza]] = []  # Nueva lista para registrar fuerzas
+    fuerzas: Optional[List[Fuerza]] = []  # Lista para registrar fuerzas
 
 class SuperficieEntrada(BaseModel):
     tipo: str

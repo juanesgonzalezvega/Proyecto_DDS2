@@ -1,21 +1,39 @@
 {% extends "base.html" %}
-
-{% block title %}Cálculo - Proyecto DaVinci{% endblock %}
+{% set page = "calculo" %}
+{% block title %}Cálculo Vectorial - Proyecto DaVinci{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Realizar cálculo</h2>
-
-<form method="post" action="/resultado">
-    <div class="mb-3">
-        <label for="valor1" class="form-label">Valor 1</label>
-        <input type="number" id="valor1" name="valor1" class="form-control" required>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Uso del cálculo</h4>
+            <p>
+                En este trabajo relacionaremos el cálculo de una manera muy específica, aplicándolo directamente al análisis de un tanque compuesto por distintas superficies geométricas. Realizaremos el cálculo detallado del área, el volumen y el área superficial del tanque, considerando tanto sus partes cilíndricas como cónicas. Además, exploraremos cómo una partícula puede desplazarse sobre la superficie cónica del tanque, describiendo su trayectoria y el comportamiento matemático que esto implica. De esta forma, no solo aplicaremos conceptos de integración y derivación al estudio de figuras geométricas sólidas, sino que también veremos cómo el cálculo permite modelar fenómenos dinámicos, como el movimiento de partículas sobre superficies curvas.
+            </p>
+        </div>
     </div>
 
-    <div class="mb-3">
-        <label for="valor2" class="form-label">Valor 2</label>
-        <input type="number" id="valor2" name="valor2" class="form-control" required>
-    </div>
+    <div class="row mt-4">
+        <!-- Eliminados los botones verticales -->
 
-    <button type="submit" class="btn btn-success">Calcular</button>
-</form>
+        <div class="col-md-12">
+            <div class="shadow rounded p-3">
+                <h5>Graficación</h5>
+                <form>
+                    <label class="form-label">Ingrese el radio de la base:</label>
+                    <input type="number" class="form-control mb-3" placeholder="Radio de la base" />
+                    <label class="form-label">Ingrese la altura máxima:</label>
+                    <input type="number" class="form-control mb-3" placeholder="Altura máxima" />
+                    <label class="form-label">Ingrese el ángulo de apertura:</label>
+                    <input type="number" class="form-control mb-3" placeholder="Ángulo de apertura" />
+                </form>
+                <div class="d-flex justify-content-center mt-3">
+                    <div style="width: 200px; height: 150px; background-color: #e0e0e0; display:flex; align-items:center; justify-content:center; color:#495057; border-radius: 8px;">
+                        Imagen figura cónica
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

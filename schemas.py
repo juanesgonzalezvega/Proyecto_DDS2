@@ -13,6 +13,15 @@ class TanqueConFuerzas(BaseModel):
     coeficiente_rozamiento: float
     fuerzas: Optional[List[Fuerza]] = []
 
+class SimulationInput(BaseModel):
+    tanque: TanqueConFuerzas  # Usa el modelo del tanque
+    tiempo: float = Field(..., gt=0, description="Tiempo en segundos para la simulación")
+
+class SimulationOutput(BaseModel):
+    aceleracion: float
+    velocidad_final: float
+    distancia_recorrida: float
+
 class EcuacionConica(BaseModel):
     A: float = Field(0.0, description="Coeficiente de x^2")
     B: float = Field(0.0, description="Coeficiente de y^2")

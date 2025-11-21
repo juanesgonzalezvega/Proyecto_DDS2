@@ -1,15 +1,25 @@
 {% extends "base.html" %}
+{% set page = "calculo" %}
 
 {% block title %}Resultado - Proyecto DaVinci{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Resultado del cálculo</h2>
+<div class="mb-4 d-flex justify-content-center gap-3 flex-wrap nav-tabs-fake">
+    <a href="/" class="nav-tab position-relative p-3 text-decoration-none text-dark flex-fill text-center">Condatt
+        <span class="icon-top-right">⚡</span></a>
+    <a href="/calculo" class="nav-tab active position-relative p-3 text-decoration-none text-dark flex-fill text-center">Cálculo
+        Vectorial <span class="icon-top-right">⚡</span></a>
+    <a href="/fisica" class="nav-tab position-relative p-3 text-decoration-none text-dark flex-fill text-center">Física
+        <span class="icon-top-right">⚡</span></a>
+    <a href="/desarrollo" class="nav-tab position-relative p-3 text-decoration-none text-dark flex-fill text-center">Desarrollo
+        de Software <span class="icon-top-right">⚡</span></a>
+</div>
 
-<div class="alert alert-info">
+<div class="card p-4 shadow-sm">
+    <h4>Resultado del cálculo</h4>
     <p><strong>Valor 1:</strong> {{ valor1 }}</p>
     <p><strong>Valor 2:</strong> {{ valor2 }}</p>
     <p><strong>Resultado:</strong> {{ resultado }}</p>
+    <a href="/calculo" class="btn btn-secondary mt-3">Volver al cálculo</a>
 </div>
-
-<a href="/calculo" class="btn btn-secondary">Volver al cálculo</a>
 {% endblock %}

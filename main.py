@@ -15,18 +15,26 @@ app.include_router(team.router, prefix="/team", tags=["Team"])
 app.include_router(project.router, prefix="/project", tags=["Project"])
 
 @app.get("/", response_class=HTMLResponse)
-async def inicio(request: Request):
-    return plantillas.TemplateResponse("index.html", {"request": request})
+async def condatta(request: Request):
+    return plantillas.TemplateResponse("condatta.html", {"request": request, "page": "condatta"})
 
 @app.get("/calculo", response_class=HTMLResponse)
 async def calculo(request: Request):
-    return plantillas.TemplateResponse("calculo.html", {"request": request})
+    return plantillas.TemplateResponse("calculo.html", {"request": request, "page": "calculo"})
+
+@app.get("/fisica", response_class=HTMLResponse)
+async def fisica(request: Request):
+    return plantillas.TemplateResponse("fisica.html", {"request": request, "page": "fisica"})
+
+@app.get("/readme", response_class=HTMLResponse)
+async def readme(request: Request):
+    return plantillas.TemplateResponse("readme.html", {"request": request, "page": "readme"})
 
 @app.post("/resultado", response_class=HTMLResponse)
 async def resultado(request: Request, valor1: float = Form(...), valor2: float = Form(...)):
     try:
         resultado = valor1 + valor2
-        datos = {"request": request, "valor1": valor1, "valor2": valor2, "resultado": resultado}
+        datos = {"request": request, "valor1": valor1, "valor2": valor2, "resultado": resultado, "page": "calculo"}
         return plantillas.TemplateResponse("resultado.html", datos)
     except Exception as e:
-        return plantillas.TemplateResponse("error.html", {"request": request, "mensaje": str(e)})
+        return plantillas.TemplateResponse("error.html", {"request": request, "mensaje": str(e), "page": "calculo"})
