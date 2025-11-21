@@ -30,6 +30,10 @@ async def fisica(request: Request):
 async def readme(request: Request):
     return plantillas.TemplateResponse("readme.html", {"request": request, "page": "readme"})
 
+@app.get("/about", response_class=HTMLResponse)  # Nueva ruta para About
+async def about(request: Request):
+    return plantillas.TemplateResponse("about.html", {"request": request, "page": "about"})
+
 @app.post("/resultado", response_class=HTMLResponse)
 async def resultado(request: Request, valor1: float = Form(...), valor2: float = Form(...)):
     try:

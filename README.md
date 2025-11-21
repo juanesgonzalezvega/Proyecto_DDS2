@@ -55,11 +55,3 @@ Buscamos estudiar y modelar el funcionamiento teórico del diseño, comprendiend
 * Diseño de la página web donde se evidencien los temas y resultados del proyecto.
 
 ---
-
-### Pasos para Concluir el Proceso:
-
-1.  **Guarda** el `README.md` con el contenido limpio de arriba.
-2.  Ve a la ventana de **Commit** (`Ctrl+K`/`Cmd+K`) y haz el **Commit de Fusión**.
-3.  Vuelve a la terminal y ejecuta: `git push -u origin main`
-
-¡Avísame cuando el *push* se haya completado con éxito!

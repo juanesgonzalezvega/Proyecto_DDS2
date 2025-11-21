@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% set page = "fisica" %}
-{% block title %}Física II - Proyecto DaVinci{% endblock %}
+{% block title %}Física II - Da Vinci's War Tank{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -14,24 +14,333 @@
     </div>
 
     <div class="row mt-4">
-        <!-- Eliminados los botones verticales -->
-
         <div class="col-md-12">
-            <form class="shadow rounded p-3">
-                <label class="form-label">Masa del tanque:</label>
-                <input type="number" class="form-control mb-3" placeholder="Masa del tanque" />
-                <label class="form-label">Velocidad (lineal):</label>
-                <input type="number" class="form-control mb-3" placeholder="Velocidad lineal" />
-                <label class="form-label">Velocidad angular:</label>
-                <input type="number" class="form-control mb-3" placeholder="Velocidad angular" />
-                <label class="form-label">Coeficiente de fricción:</label>
-                <input type="number" class="form-control mb-3" placeholder="Coeficiente de fricción" />
-                <label class="form-label">Constante de resistencia del aire:</label>
-                <input type="number" class="form-control mb-3" placeholder="Constante de resistencia del aire" />
-                <label class="form-label">Altura o inclinación de terreno:</label>
-                <input type="number" class="form-control mb-3" placeholder="Altura o inclinación" />
-            </form>
+            <div class="shadow rounded p-3">
+                <h5>¿Qué deseas calcular?</h5>
+                <select id="calculo-select" class="form-select mb-3">
+                    <option value="">Selecciona un cálculo</option>
+                    <option value="trabajo">Trabajo, calor y energía interna</option>
+                    <option value="primera-ley">Primera ley de la termodinámica (aplicada al trabajo mecánico)</option>
+                    <option value="procesos">Procesos termodinámicos (solo desde el trabajo)</option>
+                    <option value="principio-pascal">Principio de Pascal</option>
+                    <option value="segunda-ley">Segunda ley (solo eficiencia energética)</option>
+                    <option value="cinematica">Cinemática/dinámica del movimiento</option>
+                </select>
+
+                <!-- Sección para Trabajo, calor y energía interna -->
+                <div id="trabajo" class="variables-section" style="display: none;">
+                    <h6>Variables necesarias:</h6>
+                    <label class="form-label">Masa del tanque (kg):</label>
+                    <input type="number" id="trabajo-m" class="form-control mb-3" placeholder="Masa del tanque" />
+                    <label class="form-label">Velocidad lineal (m/s):</label>
+                    <input type="number" id="trabajo-v" class="form-control mb-3" placeholder="Velocidad lineal" />
+                    <label class="form-label">Velocidad angular (rad/s):</label>
+                    <input type="number" id="trabajo-omega" class="form-control mb-3" placeholder="Velocidad angular" />
+                    <label class="form-label">Coeficiente de fricción del terreno:</label>
+                    <input type="number" id="trabajo-mu" class="form-control mb-3" placeholder="Coeficiente de fricción" />
+                    <label class="form-label">Inclinación o altura del terreno (grados):</label>
+                    <input type="number" id="trabajo-theta" class="form-control mb-3" placeholder="Inclinación o altura" />
+                    <label class="form-label">Constante de resistencia del aire:</label>
+                    <input type="number" id="trabajo-kair" class="form-control mb-3" placeholder="Constante de resistencia" />
+                    <button class="btn btn-primary mt-3" onclick="calcularTrabajo()">Calcular</button>
+                    <div id="resultado-trabajo" class="mt-3 alert alert-info" style="display: none;"></div>
+                </div>
+
+                <!-- Sección para Primera ley de la termodinámica -->
+                <div id="primera-ley" class="variables-section" style="display: none;">
+                    <h6>Variables necesarias:</h6>
+                    <label class="form-label">Masa del tanque (kg):</label>
+                    <input type="number" id="primera-m" class="form-control mb-3" placeholder="Masa del tanque" />
+                    <label class="form-label">Velocidad lineal (m/s):</label>
+                    <input type="number" id="primera-v" class="form-control mb-3" placeholder="Velocidad lineal" />
+                    <label class="form-label">Coeficiente de fricción:</label>
+                    <input type="number" id="primera-mu" class="form-control mb-3" placeholder="Coeficiente de fricción" />
+                    <label class="form-label">Inclinación del terreno (grados):</label>
+                    <input type="number" id="primera-theta" class="form-control mb-3" placeholder="Inclinación del terreno" />
+                    <label class="form-label">Constante de resistencia del aire:</label>
+                    <input type="number" id="primera-kair" class="form-control mb-3" placeholder="Constante de resistencia" />
+                    <label class="form-label">(Opcional) Eficiencia del motor:</label>
+                    <input type="number" id="primera-eta" class="form-control mb-3" placeholder="Eficiencia del motor" />
+                    <button class="btn btn-primary mt-3" onclick="calcularPrimeraLey()">Calcular</button>
+                    <div id="resultado-primera" class="mt-3 alert alert-info" style="display: none;"></div>
+                </div>
+
+                <!-- Sección para Procesos termodinámicos -->
+                <div id="procesos" class="variables-section" style="display: none;">
+                    <h6>Variables necesarias:</h6>
+                    <label class="form-label">Masa del tanque (kg):</label>
+                    <input type="number" id="procesos-m" class="form-control mb-3" placeholder="Masa del tanque" />
+                    <label class="form-label">Velocidad lineal (m/s):</label>
+                    <input type="number" id="procesos-v" class="form-control mb-3" placeholder="Velocidad lineal" />
+                    <label class="form-label">Inclinación del terreno (grados):</label>
+                    <input type="number" id="procesos-theta" class="form-control mb-3" placeholder="Inclinación del terreno" />
+                    <label class="form-label">Coeficiente de fricción:</label>
+                    <input type="number" id="procesos-mu" class="form-control mb-3" placeholder="Coeficiente de fricción" />
+                    <label class="form-label">Constante de resistencia del aire:</label>
+                    <input type="number" id="procesos-kair" class="form-control mb-3" placeholder="Constante de resistencia" />
+                    <button class="btn btn-primary mt-3" onclick="calcularProcesos()">Calcular</button>
+                    <div id="resultado-procesos" class="mt-3 alert alert-info" style="display: none;"></div>
+                </div>
+
+                <!-- Sección para Principio de Pascal -->
+                <div id="principio-pascal" class="variables-section" style="display: none;">
+                    <h6>Variables necesarias:</h6>
+                    <p>Nota: El Principio de Pascal se aplica a fluidos, pero para este contexto, calcula presión básica.</p>
+                    <label class="form-label">Masa del tanque (kg):</label>
+                    <input type="number" id="pascal-m" class="form-control mb-3" placeholder="Masa del tanque" />
+                    <label class="form-label">Velocidad lineal (m/s):</label>
+                    <input type="number" id="pascal-v" class="form-control mb-3" placeholder="Velocidad lineal" />
+                    <button class="btn btn-primary mt-3" onclick="calcularPascal()">Calcular</button>
+                    <div id="resultado-pascal" class="mt-3 alert alert-info" style="display: none;"></div>
+                </div>
+
+                <!-- Sección para Segunda ley -->
+                <div id="segunda-ley" class="variables-section" style="display: none;">
+                    <h6>Variables necesarias:</h6>
+                    <label class="form-label">Masa del tanque (kg):</label>
+                    <input type="number" id="segunda-m" class="form-control mb-3" placeholder="Masa del tanque" />
+                    <label class="form-label">Velocidad lineal (m/s):</label>
+                    <input type="number" id="segunda-v" class="form-control mb-3" placeholder="Velocidad lineal" />
+                    <label class="form-label">Coeficiente de fricción:</label>
+                    <input type="number" id="segunda-mu" class="form-control mb-3" placeholder="Coeficiente de fricción" />
+                    <label class="form-label">Inclinación del terreno (grados):</label>
+                    <input type="number" id="segunda-theta" class="form-control mb-3" placeholder="Inclinación del terreno" />
+                    <label class="form-label">Constante de resistencia del aire:</label>
+                    <input type="number" id="segunda-kair" class="form-control mb-3" placeholder="Constante de resistencia" />
+                    <label class="form-label">Trabajo útil realizado (J):</label>
+                    <input type="number" id="segunda-wutil" class="form-control mb-3" placeholder="Trabajo útil" />
+                    <label class="form-label">Trabajo de entrada (J):</label>
+                    <input type="number" id="segunda-wentrada" class="form-control mb-3" placeholder="Trabajo de entrada" />
+                    <button class="btn btn-primary mt-3" onclick="calcularSegundaLey()">Calcular</button>
+                    <div id="resultado-segunda" class="mt-3 alert alert-info" style="display: none;"></div>
+                </div>
+
+                <!-- Sección para Cinemática/dinámica -->
+                <div id="cinematica" class="variables-section" style="display: none;">
+                    <h6>Variables necesarias:</h6>
+                    <label class="form-label">Masa del tanque (kg):</label>
+                    <input type="number" id="cinematica-m" class="form-control mb-3" placeholder="Masa del tanque" />
+                    <label class="form-label">Velocidad lineal (m/s):</label>
+                    <input type="number" id="cinematica-v" class="form-control mb-3" placeholder="Velocidad lineal" />
+                    <label class="form-label">Velocidad angular (rad/s):</label>
+                    <input type="number" id="cinematica-omega" class="form-control mb-3" placeholder="Velocidad angular" />
+                    <label class="form-label">Aceleración (m/s²):</label>
+                    <input type="number" id="cinematica-a" class="form-control mb-3" placeholder="Aceleración" />
+                    <label class="form-label">Coeficiente de fricción:</label>
+                    <input type="number" id="cinematica-mu" class="form-control mb-3" placeholder="Coeficiente de fricción" />
+                    <label class="form-label">Inclinación del terreno (grados):</label>
+                    <input type="number" id="cinematica-theta" class="form-control mb-3" placeholder="Inclinación del terreno" />
+                    <label class="form-label">Constante de resistencia del aire:</label>
+                    <input type="number" id="cinematica-kair" class="form-control mb-3" placeholder="Constante de resistencia" />
+                    <button class="btn btn-primary mt-3" onclick="calcularCinematica()">Calcular</button>
+                    <div id="resultado-cinematica" class="mt-3 alert alert-info" style="display: none;"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    // Función para mostrar/ocultar secciones
+    document.getElementById('calculo-select').addEventListener('change', function() {
+        const selected = this.value;
+        const sections = document.querySelectorAll('.variables-section');
+        sections.forEach(section => section.style.display = 'none');
+        if (selected) {
+            document.getElementById(selected).style.display = 'block';
+        }
+    });
+
+    // Constantes
+    const g = 9.81; // Gravedad (m/s²)
+    const d = 10; // Distancia recorrida asumida (m)
+    const r = 0.5; // Radio de ruedas asumido (m)
+
+    // Función para validar campos
+    function validarCampos(ids) {
+        for (let id of ids) {
+            const valor = document.getElementById(id).value.trim();
+            if (!valor || valor === '') {
+                alert('Valores incompletos, por favor ingrese todos los valores para proseguir con el cálculo');
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Cálculos
+    function calcularTrabajo() {
+        const ids = ['trabajo-m', 'trabajo-v', 'trabajo-omega', 'trabajo-mu', 'trabajo-theta', 'trabajo-kair'];
+        if (!validarCampos(ids)) return;
+        
+        const m = parseFloat(document.getElementById('trabajo-m').value);
+        const v = parseFloat(document.getElementById('trabajo-v').value);
+        const omega = parseFloat(document.getElementById('trabajo-omega').value);
+        const mu = parseFloat(document.getElementById('trabajo-mu').value);
+        const theta = parseFloat(document.getElementById('trabajo-theta').value) * Math.PI / 180;
+        const kair = parseFloat(document.getElementById('trabajo-kair').value);
+        
+        const Ff = mu * m * g * Math.cos(theta);
+        const Fp = m * g * Math.sin(theta);
+        const Fair = kair * v;
+        const W = (Ff + Fp + Fair) * d;
+        
+        document.getElementById('resultado-trabajo').innerHTML = `
+            <strong>Ecuación base:</strong> W = (F_f + F_p + F_air) × d<br>
+            <strong>Donde:</strong><br>
+            - F_f = μmg·cos(θ) = ${mu} × ${m} × ${g} × cos(${(theta * 180 / Math.PI).toFixed(2)}°) = ${Ff.toFixed(2)} N<br>
+            - F_p = mg·sin(θ) = ${m} × ${g} × sin(${(theta * 180 / Math.PI).toFixed(2)}°) = ${Fp.toFixed(2)} N<br>
+            - F_air = k_air × v = ${kair} × ${v} = ${Fair.toFixed(2)} N<br>
+            <strong>Ecuación reemplazada:</strong> W = (${Ff.toFixed(2)} + ${Fp.toFixed(2)} + ${Fair.toFixed(2)}) × ${d}<br>
+            <strong>Resultado:</strong> W = ${W.toFixed(2)} J
+        `;
+        document.getElementById('resultado-trabajo').style.display = 'block';
+    }
+
+    function calcularPrimeraLey() {
+        const ids = ['primera-m', 'primera-v', 'primera-mu', 'primera-theta', 'primera-kair'];
+        if (!validarCampos(ids)) return;
+        
+        const m = parseFloat(document.getElementById('primera-m').value);
+        const v = parseFloat(document.getElementById('primera-v').value);
+        const mu = parseFloat(document.getElementById('primera-mu').value);
+        const theta = parseFloat(document.getElementById('primera-theta').value) * Math.PI / 180;
+        const kair = parseFloat(document.getElementById('primera-kair').value);
+        
+        const Ff = mu * m * g * Math.cos(theta);
+        const Fp = m * g * Math.sin(theta);
+        const Fair = kair * v;
+        const W = (Ff + Fp + Fair) * d;
+        const Q = 0; // Calor aportado asumido como 0
+        const deltaU = Q - W;
+        
+        document.getElementById('resultado-primera').innerHTML = `
+            <strong>Ecuación base:</strong> ΔU = Q - W<br>
+            <strong>Cálculo del trabajo W:</strong><br>
+            - F_f = ${Ff.toFixed(2)} N, F_p = ${Fp.toFixed(2)} N, F_air = ${Fair.toFixed(2)} N<br>
+            - W = (${Ff.toFixed(2)} + ${Fp.toFixed(2)} + ${Fair.toFixed(2)}) × ${d} = ${W.toFixed(2)} J<br>
+            <strong>Ecuación reemplazada:</strong> ΔU = ${Q} - ${W.toFixed(2)}<br>
+            <strong>Resultado:</strong> ΔU = ${deltaU.toFixed(2)} J
+        `;
+        document.getElementById('resultado-primera').style.display = 'block';
+    }
+
+    function calcularProcesos() {
+        const ids = ['procesos-m', 'procesos-v', 'procesos-theta', 'procesos-mu', 'procesos-kair'];
+        if (!validarCampos(ids)) return;
+        
+        const m = parseFloat(document.getElementById('procesos-m').value);
+        const v = parseFloat(document.getElementById('procesos-v').value);
+        const theta = parseFloat(document.getElementById('procesos-theta').value) * Math.PI / 180;
+        const mu = parseFloat(document.getElementById('procesos-mu').value);
+        const kair = parseFloat(document.getElementById('procesos-kair').value);
+        
+        const Ff = mu * m * g * Math.cos(theta);
+        const Fp = m * g * Math.sin(theta);
+        const Fair = kair * v;
+        const Fnet = Ff + Fp + Fair;
+        const Wproc = Fnet * d;
+        
+        document.getElementById('resultado-procesos').innerHTML = `
+            <strong>Ecuación base:</strong> W_proc = F_net × d<br>
+            <strong>Donde:</strong><br>
+            - F_net = F_f + F_p + F_air<br>
+            - F_f = ${Ff.toFixed(2)} N, F_p = ${Fp.toFixed(2)} N, F_air = ${Fair.toFixed(2)} N<br>
+            - F_net = ${Ff.toFixed(2)} + ${Fp.toFixed(2)} + ${Fair.toFixed(2)} = ${Fnet.toFixed(2)} N<br>
+            <strong>Ecuación reemplazada:</strong> W_proc = ${Fnet.toFixed(2)} × ${d}<br>
+            <strong>Resultado:</strong> W_proc = ${Wproc.toFixed(2)} J
+        `;
+        document.getElementById('resultado-procesos').style.display = 'block';
+    }
+
+    function calcularPascal() {
+        const ids = ['pascal-m', 'pascal-v'];
+        if (!validarCampos(ids)) return;
+        
+        const m = parseFloat(document.getElementById('pascal-m').value);
+        const v = parseFloat(document.getElementById('pascal-v').value);
+        const A = Math.PI * 0.25; // Área circular asumida
+        const F = m * g;
+        const P = F / A;
+        
+        document.getElementById('resultado-pascal').innerHTML = `
+            <strong>Ecuación base:</strong> P = F / A<br>
+            <strong>Donde:</strong><br>
+            - F = m × g = ${m} × ${g} = ${F.toFixed(2)} N<br>
+            - A = ${A.toFixed(2)} m²<br>
+            <strong>Ecuación reemplazada:</strong> P = ${F.toFixed(2)} / ${A.toFixed(2)}<br>
+            <strong>Resultado:</strong> P = ${P.toFixed(2)} Pa
+        `;
+        document.getElementById('resultado-pascal').style.display = 'block';
+    }
+
+    function calcularSegundaLey() {
+        const ids = ['segunda-m', 'segunda-v', 'segunda-mu', 'segunda-theta', 'segunda-kair', 'segunda-wutil', 'segunda-wentrada'];
+        if (!validarCampos(ids)) return;
+        
+        const m = parseFloat(document.getElementById('segunda-m').value);
+        const v = parseFloat(document.getElementById('segunda-v').value);
+        const mu = parseFloat(document.getElementById('segunda-mu').value);
+        const theta = parseFloat(document.getElementById('segunda-theta').value) * Math.PI / 180;
+        const kair = parseFloat(document.getElementById('segunda-kair').value);
+        const wutil = parseFloat(document.getElementById('segunda-wutil').value);
+        const wentrada = parseFloat(document.getElementById('segunda-wentrada').value);
+        
+        const eta = wutil / wentrada;
+        const etaPorcentaje = eta * 100;
+        
+        document.getElementById('resultado-segunda').innerHTML = `
+            <strong>Ecuación base:</strong> η = W_útil / W_entrada<br>
+            <strong>Ecuación reemplazada:</strong> η = ${wutil} / ${wentrada}<br>
+            <strong>Resultado:</strong> η = ${eta.toFixed(4)} (${etaPorcentaje.toFixed(2)}%)
+        `;
+        document.getElementById('resultado-segunda').style.display = 'block';
+    }
+
+    function calcularCinematica() {
+        const ids = ['cinematica-m', 'cinematica-v', 'cinematica-omega', 'cinematica-a', 'cinematica-mu', 'cinematica-theta', 'cinematica-kair'];
+        if (!validarCampos(ids)) return;
+        
+        const m = parseFloat(document.getElementById('cinematica-m').value);
+        const v = parseFloat(document.getElementById('cinematica-v').value);
+        const omega = parseFloat(document.getElementById('cinematica-omega').value);
+        const a = parseFloat(document.getElementById('cinematica-a').value);
+        const mu = parseFloat(document.getElementById('cinematica-mu').value);
+        const theta = parseFloat(document.getElementById('cinematica-theta').value) * Math.PI / 180;
+        const kair = parseFloat(document.getElementById('cinematica-kair').value);
+        
+        // Verificar relación v = ω × r
+        const vCalculada = omega * r;
+        
+        // Calcular fuerzas
+        const Ff = mu * m * g * Math.cos(theta);
+        const Fp = m * g * Math.sin(theta);
+        const Fair = kair * v;
+        
+        // Segunda ley de Newton: F_net = ma
+        const Fnet = m * a;
+        
+        // Fuerza del motor: F_motor = ma + F_f + F_p + F_air
+        const Fmotor = m * a + Ff + Fp + Fair;
+        
+        document.getElementById('resultado-cinematica').innerHTML = `
+            <strong>1. Relación velocidad lineal y angular:</strong><br>
+            - Ecuación base: v = ω × r<br>
+            - Ecuación reemplazada: v = ${omega} × ${r}<br>
+            - Resultado: v_calculada = ${vCalculada.toFixed(2)} m/s (v_dada = ${v} m/s)<br><br>
+            
+            <strong>2. Segunda ley de Newton:</strong><br>
+            - Ecuación base: F_net = m × a<br>
+            - Ecuación reemplazada: F_net = ${m} × ${a}<br>
+            - Resultado: F_net = ${Fnet.toFixed(2)} N<br><br>
+            
+            <strong>3. Fuerza del motor:</strong><br>
+            - Ecuación base: F_motor = m×a + F_f + F_p + F_air<br>
+            - Donde: F_f = ${Ff.toFixed(2)} N, F_p = ${Fp.toFixed(2)} N, F_air = ${Fair.toFixed(2)} N<br>
+            - Ecuación reemplazada: F_motor = ${(m * a).toFixed(2)} + ${Ff.toFixed(2)} + ${Fp.toFixed(2)} + ${Fair.toFixed(2)}<br>
+            - Resultado: F_motor = ${Fmotor.toFixed(2)} N
+        `;
+        document.getElementById('resultado-cinematica').style.display = 'block';
+    }
+</script>
 {% endblock %}
