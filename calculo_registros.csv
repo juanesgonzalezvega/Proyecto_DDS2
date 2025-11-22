@@ -1,3 +1,4 @@
 Ecuacion,Tipo_Superficie,Punto,Valor,En_Superficie
 "{'A': 0.0, 'B': 0.0, 'C': 0.0, 'D': 23.0, 'E': 0.0, 'F': 0.0, 'G': 0.0, 'H': 0.0, 'I': 0.0, 'J': 0.0}",Clasificación compleja (con términos mixtos),"(0.0, 0.0, 0.0)",0.0,True
 "{'A': 12.0, 'B': 2.0, 'C': 0.0, 'D': 0.0, 'E': 0.0, 'F': 0.0, 'G': 0.0, 'H': 0.0, 'I': 0.0, 'J': 0.03}",Paraboloide (Elíptico o Hiperbólico),"(1.0, 0.0, 0.0)",12.03,False
+"{'A': 0.0, 'B': 0.0, 'C': 0.0, 'D': 0.0, 'E': 0.0, 'F': 0.0, 'G': 0.0, 'H': 0.0, 'I': 0.0, 'J': 0.0}",No clasificable o Plano,"(0.0, 0.0, 0.0)",0.0,True
